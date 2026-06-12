@@ -1,0 +1,69 @@
+﻿@model IEnumerable<EscalationMatrix.Models.EMatrixViewModel>
+
+@{
+    ViewBag.Title = "EMList";
+}
+
+<h2>EMList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateEM")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Sr no.
+        </th>
+        <th>
+            Complaint - Type
+        </th>
+        <th>
+            Scope of Work
+        </th>
+        <th>
+            Added by
+        </th>
+        <th>
+            Added On
+        </th>
+        <th>
+            Update by
+        </th>
+        <th>
+            Update On
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HeaderID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ComplaintType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ScopeofWork)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Addedby)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AddedOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Updateby)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdateOn)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EMEdit", new {  id=item.HeaderID  }) |
+            @Html.ActionLink("Details", "EMDetails", new { id = item.HeaderID }) |
+            @Html.ActionLink("Delete", "EMDelete", new { id = item.HeaderID })
+        </td>
+    </tr>
+}
+
+</table>

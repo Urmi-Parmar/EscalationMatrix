@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EMatrixModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="DepartmentDescrip" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="EM_Header">
+          <Key>
+            <PropertyRef Name="EMHeader" />
+          </Key>
+          <Property Name="EMHeader" Type="int" Nullable="false" />
+          <Property Name="ComplaintType" Type="nvarchar" MaxLength="100" />
+          <Property Name="ScopeofWork" Type="nvarchar" MaxLength="500" />
+          <Property Name="Addedby" Type="int" />
+          <Property Name="AddedOn" Type="datetime" />
+          <Property Name="Updateby" Type="int" />
+          <Property Name="UpdateOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EM_history">
+          <Key>
+            <PropertyRef Name="EM_HistoryID" />
+          </Key>
+          <Property Name="EM_HistoryID" Type="int" Nullable="false" />
+          <Property Name="EM_Header_ID" Type="int" />
+          <Property Name="Window" Type="nvarchar" MaxLength="100" />
+          <Property Name="NameOfAssociate" Type="nvarchar" MaxLength="100" />
+          <Property Name="ContactDetails" Type="int" />
+          <Property Name="Addedby" Type="int" />
+          <Property Name="Addedon" Type="datetime" />
+          <Property Name="Updateby" Type="int" />
+          <Property Name="UpdateOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_EM_history_EM_history">
+          <End Role="EM_history" Type="Self.EM_history" Multiplicity="1" />
+          <End Role="EM_history1" Type="Self.EM_history" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EM_history">
+              <PropertyRef Name="EM_HistoryID" />
+            </Principal>
+            <Dependent Role="EM_history1">
+              <PropertyRef Name="EM_HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EMatrixModelStoreContainer">
+          <EntitySet Name="DepartmentMaster" EntityType="Self.DepartmentMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EM_Header" EntityType="Self.EM_Header" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EM_history" EntityType="Self.EM_history" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EM_history_EM_history" Association="Self.FK_EM_history_EM_history">
+            <End Role="EM_history" EntitySet="EM_history" />
+            <End Role="EM_history1" EntitySet="EM_history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EMatrixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EM_Header">
+          <Key>
+            <PropertyRef Name="EMHeader" />
+          </Key>
+          <Property Name="EMHeader" Type="Int32" Nullable="false" />
+          <Property Name="ComplaintType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ScopeofWork" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Addedby" Type="Int32" />
+          <Property Name="AddedOn" Type="DateTime" Precision="3" />
+          <Property Name="Updateby" Type="Int32" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="EM_history">
+          <Key>
+            <PropertyRef Name="EM_HistoryID" />
+          </Key>
+          <Property Name="EM_HistoryID" Type="Int32" Nullable="false" />
+          <Property Name="EM_Header_ID" Type="Int32" />
+          <Property Name="Window" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NameOfAssociate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ContactDetails" Type="Int32" />
+          <Property Name="Addedby" Type="Int32" />
+          <Property Name="Addedon" Type="DateTime" Precision="3" />
+          <Property Name="Updateby" Type="Int32" />
+          <Property Name="UpdateOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="EM_history1" Relationship="Self.FK_EM_history_EM_history" FromRole="EM_history" ToRole="EM_history1" />
+          <NavigationProperty Name="EM_history2" Relationship="Self.FK_EM_history_EM_history" FromRole="EM_history1" ToRole="EM_history" />
+        </EntityType>
+        <Association Name="FK_EM_history_EM_history">
+          <End Role="EM_history" Type="Self.EM_history" Multiplicity="1" />
+          <End Role="EM_history1" Type="Self.EM_history" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="EM_history">
+              <PropertyRef Name="EM_HistoryID" />
+            </Principal>
+            <Dependent Role="EM_history1">
+              <PropertyRef Name="EM_HistoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EMatrixEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EM_Header" EntityType="Self.EM_Header" />
+          <EntitySet Name="EM_history" EntityType="Self.EM_history" />
+          <AssociationSet Name="FK_EM_history_EM_history" Association="Self.FK_EM_history_EM_history">
+            <End Role="EM_history" EntitySet="EM_history" />
+            <End Role="EM_history1" EntitySet="EM_history" />
+          </AssociationSet>
+          <EntitySet Name="DepartmentMasters" EntityType="EMatrixModel.DepartmentMaster" />
+        </EntityContainer>
+        <EntityType Name="DepartmentMaster">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="DepartmentDescrip" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EMatrixModelStoreContainer" CdmEntityContainer="EMatrixEntities">
+          <EntitySetMapping Name="EM_Header">
+            <EntityTypeMapping TypeName="EMatrixModel.EM_Header">
+              <MappingFragment StoreEntitySet="EM_Header">
+                <ScalarProperty Name="EMHeader" ColumnName="EMHeader" />
+                <ScalarProperty Name="ComplaintType" ColumnName="ComplaintType" />
+                <ScalarProperty Name="ScopeofWork" ColumnName="ScopeofWork" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="Updateby" ColumnName="Updateby" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EM_history">
+            <EntityTypeMapping TypeName="EMatrixModel.EM_history">
+              <MappingFragment StoreEntitySet="EM_history">
+                <ScalarProperty Name="EM_HistoryID" ColumnName="EM_HistoryID" />
+                <ScalarProperty Name="EM_Header_ID" ColumnName="EM_Header_ID" />
+                <ScalarProperty Name="Window" ColumnName="Window" />
+                <ScalarProperty Name="NameOfAssociate" ColumnName="NameOfAssociate" />
+                <ScalarProperty Name="ContactDetails" ColumnName="ContactDetails" />
+                <ScalarProperty Name="Addedby" ColumnName="Addedby" />
+                <ScalarProperty Name="Addedon" ColumnName="Addedon" />
+                <ScalarProperty Name="Updateby" ColumnName="Updateby" />
+                <ScalarProperty Name="UpdateOn" ColumnName="UpdateOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DepartmentMasters">
+            <EntityTypeMapping TypeName="EMatrixModel.DepartmentMaster">
+              <MappingFragment StoreEntitySet="DepartmentMaster">
+                <ScalarProperty Name="DepartmentDescrip" ColumnName="DepartmentDescrip" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
