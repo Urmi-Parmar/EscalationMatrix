@@ -33,10 +33,10 @@ namespace EscalationMatrix.Controllers
         [HttpGet]
         public ActionResult EMList()
         {
-            var Data = _escalationMatrixService.GetData();
+            var Data = _escalationMatrixService.GetData1();
            
 
-            return View(q1);
+            return View(Data);
         }
         public ActionResult CreateEM()
         {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace EscalationMatrix.IService
 {
-	public class IEscalationMatrixService
+	public interface IEscalationMatrixService
 	{
 		Task<List<EMatrixViewModel>> GetData1();
 

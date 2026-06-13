@@ -11,9 +11,11 @@ namespace EscalationMatrix.Service
 {
 	public class EscalationMatrixService : IEscalationMatrixService
     {
-        public async Task<List<EMatrixViewModel>> GetData()
+        public async Task<List<EMatrixViewModel>> GetData1()
         {
+            List<EMatrixViewModel> obj = new List<EMatrixViewModel>();
 
+            return obj;
         }
     }
 }

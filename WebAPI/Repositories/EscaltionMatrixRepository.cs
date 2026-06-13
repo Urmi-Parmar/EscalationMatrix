@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Repositories
 {
-    public class EscaltionMatrixRepository
+    public class IEscaltionMatrixRepository
     {
         public async Task<List<EMatrixViewModel>> GetData()
         {
