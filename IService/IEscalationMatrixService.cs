@@ -7,7 +7,7 @@ namespace EscalationMatrix.IService
 {
 	public class IEscalationMatrixService
 	{
-		Task<List<EMatrixViewModel>> GetData();
+		Task<List<EMatrixViewModel>> GetData1();
 
     }
 }
