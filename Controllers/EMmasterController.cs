@@ -1,16 +1,30 @@
-﻿using EscalationMatrix.DBClass;
-using EscalationMatrix.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using EscalationMatrix.Models;
+using EscalationMatrix.IService;
+using Microsoft.AspNetCore.Mvc;
 using System.Web.Mvc;
 
 namespace EscalationMatrix.Controllers
 {
     public class EMmasterController : Controller
     {
-        EMatrixEntities DbContext = new EMatrixEntities();
+        private readonly IEscalationMatrixService _escalationMatrixService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
+
+        public EMmasterController(
+            IConfiguration configuration,
+            IEscalationMatrixService escalationMatrixService,
+            IHttpContextAccessor httpContextAccessor)
+        {
+            _escalationMatrixService = escalationMatrixService;
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        long userID;
+    
+
+        //EMatrixEntities DbContext = new EMatrixEntities();
         // GET: EMmaster
         public ActionResult Index()
         {
@@ -19,24 +33,14 @@ namespace EscalationMatrix.Controllers
         [HttpGet]
         public ActionResult EMList()
         {
-            var q1 = DbContext.EM_Header
-                     .Select(x => new EMatrixViewModel
-                     {
-                         HeaderID = x.EMHeader,
-                         ComplaintType = x.ComplaintType,
-                         ScopeofWork = x.ScopeofWork,
-                         Addedby = x.Addedby,
-                         AddedOn = x.AddedOn,
-                         Updateby = x.Updateby,
-                         UpdateOn = x.UpdateOn
-                     })
-                     .ToList();
+            var Data = _escalationMatrixService.GetData();
+           
 
             return View(q1);
         }
         public ActionResult CreateEM()
         {
-            var q1 = DbContext.
+           // var q1 = DbContext.
             return View();
         }
     }
