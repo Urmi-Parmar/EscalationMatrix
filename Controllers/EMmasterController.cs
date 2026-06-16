@@ -1,24 +1,25 @@
 ﻿using EscalationMatrix.Models;
 using EscalationMatrix.IService;
-using Microsoft.AspNetCore.Mvc;
+//using Microsoft.AspNetCore.Mvc;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace EscalationMatrix.Controllers
 {
     public class EMmasterController : Controller
     {
         private readonly IEscalationMatrixService _escalationMatrixService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IConfiguration _configuration;
+        //private readonly IHttpContextAccessor _httpContextAccessor;
+        //private readonly IConfiguration _configuration;
 
         public EMmasterController(
-            IConfiguration configuration,
-            IEscalationMatrixService escalationMatrixService,
-            IHttpContextAccessor httpContextAccessor)
+            //IConfiguration configuration,
+            IEscalationMatrixService escalationMatrixService)//,
+           // IHttpContextAccessor httpContextAccessor)
         {
             _escalationMatrixService = escalationMatrixService;
-            _configuration = configuration;
-            _httpContextAccessor = httpContextAccessor;
+            //_configuration = configuration;
+            //_httpContextAccessor = httpContextAccessor;
         }
 
         long userID;
@@ -31,12 +32,12 @@ namespace EscalationMatrix.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult EMList()
+        public async Task<ActionResult> EMList()
         {
-            var Data = _escalationMatrixService.GetData();
+            var Data = await _escalationMatrixService.GetData1();
            
 
-            return View(q1);
+            return View(Data);
         }
         public ActionResult CreateEM()
         {

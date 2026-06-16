@@ -1,11 +1,13 @@
-﻿using EscaltionMatrix.DBClass;
-using Microsoft.EntityFrameworkCore;
+﻿using EscalationMatrix.DBClass;
+//using Microsoft.EntityFrameworkCore;
+using WebAPI.IRepositories;
+using EscalationMatrix.Models;
 
 namespace WebAPI.Repositories
 {
-    public class EscaltionMatrixRepository
+    public class EscalationMatrixRepository : IEscalationMatrixRepository
     {
-        public async Task<List<EMatrixViewModel>> GetData()
+        public async Task<List<EMatrixViewModel>> GetData1()
         {
             using (var dbContext = new EMatrixEntities())
             {

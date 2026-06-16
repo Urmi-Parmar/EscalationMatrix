@@ -11,10 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="IRepositories\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\EscalationMatrix.csproj" />
     <ProjectReference Include="..\EscalationMatrix\EscalationMatrix.csproj" />
   </ItemGroup>
 
