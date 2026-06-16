@@ -7,5 +7,10 @@ namespace EscalationMatrix.Data
 {
 	public class APIMapper
 	{
-	}
+        public static class EscalationMatrix
+        {
+            public static string GetData1 = "api/EscalationMatrix/GetData1";
+        }
+        
+    }
 }

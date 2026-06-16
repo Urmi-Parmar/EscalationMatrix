@@ -1,21 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using EscalationMatrix.Models;
 using EscalationMatrix.Data;
 using EscalationMatrix.IService;
 using System.Threading.Tasks;
+using System.Net.Http;
+using Newtonsoft.Json;
+
 
 namespace EscalationMatrix.Service
 {
-	public class EscalationMatrixService : IEscalationMatrixService
+    public class EscalationMatrixService : IEscalationMatrixService
     {
+        private readonly HttpClient _httpClient;
+
         public async Task<List<EMatrixViewModel>> GetData1()
         {
-            List<EMatrixViewModel> obj = new List<EMatrixViewModel>();
+            try
+            {
+                var url = APIMapper.EscalationMatrix.GetData1;
 
-            return obj;
+                var response = await _httpClient.GetAsync(url);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    var error = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("API ERROR: " + error);
+                    return new List<EMatrixViewModel>();
+                }
+
+                var json = await response.Content.ReadAsStringAsync();
+
+                var data = JsonConvert.DeserializeObject<List<EMatrixViewModel>>(json);
+
+                return data ?? new List<EMatrixViewModel>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("EXCEPTION: " + ex.Message);
+                return new List<EMatrixViewModel>();
+            }
+
         }
     }
 }
